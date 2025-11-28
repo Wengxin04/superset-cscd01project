@@ -16,6 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+/**
+ * Licensed to the Apache Software Foundation (ASF)...
+ */
 import sinon from 'sinon';
 
 import newComponentFactory from 'src/dashboard/util/newComponentFactory';
@@ -24,11 +27,11 @@ import {
   DASHBOARD_GRID_TYPE,
 } from 'src/dashboard/util/componentTypes';
 import { screen, render, userEvent } from 'spec/helpers/testing-library';
-import Divider from './Divider';
+import Divider, { DividerProps } from './Divider';
 
-// eslint-disable-next-line no-restricted-globals -- TODO: Migrate from describe blocks
+// eslint-disable-next-line no-restricted-globals -- TODO: migrate from describe blocks
 describe('Divider', () => {
-  const props = {
+  const baseProps: DividerProps = {
     id: 'id',
     parentId: 'parentId',
     component: newComponentFactory(DIVIDER_TYPE),
@@ -36,15 +39,13 @@ describe('Divider', () => {
     parentComponent: newComponentFactory(DASHBOARD_GRID_TYPE),
     index: 0,
     editMode: false,
-    handleComponentDrop() {},
-    deleteComponent() {},
+    handleComponentDrop: () => {},
+    deleteComponent: () => {},
   };
 
-  const setup = overrideProps =>
-    // We have to wrap provide DragDropContext for the underlying DragDroppable
-    // otherwise we cannot assert on DragDroppable children
-    render(<Divider {...props} {...overrideProps} />, {
-      useDnd: true,
+  const setup = (overrideProps: Partial<DividerProps> = {}) =>
+    render(<Divider {...baseProps} {...overrideProps} />, {
+      useDnd: true, // required for DragDroppable
     });
 
   test('should render a Draggable', () => {
@@ -64,7 +65,6 @@ describe('Divider', () => {
     expect(screen.queryByTestId('hover-menu')).not.toBeInTheDocument();
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
 
-    // we cannot set props on the Divider because of the WithDragDropContext wrapper
     setup({ editMode: true });
     expect(screen.getByTestId('hover-menu')).toBeInTheDocument();
     expect(screen.getByRole('button').firstChild).toHaveAttribute(
