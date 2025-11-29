@@ -47,7 +47,7 @@ export interface DividerProps {
   parentComponent: DashboardComponent;
   index: number;
   editMode: boolean;
-  handleComponentDrop: (...args: any[]) => void;
+  handleComponentDrop: (dropResult: unknown) => void; 
   deleteComponent: (id: string, parentId: string) => void;
 }
 

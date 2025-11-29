@@ -39,13 +39,13 @@ describe('Divider', () => {
     parentComponent: newComponentFactory(DASHBOARD_GRID_TYPE),
     index: 0,
     editMode: false,
-    handleComponentDrop: (...args: any[]) => {},
+    handleComponentDrop: jest.fn(),
     deleteComponent: (id: string, parentId: string) => {},
   };
 
   const setup = (overrideProps: Partial<DividerProps> = {}) =>
     render(<Divider {...baseProps} {...overrideProps} />, {
-      useDnd: true, // required for DragDroppable
+      useDnd: true,
     });
 
   test('should render a Draggable', () => {
