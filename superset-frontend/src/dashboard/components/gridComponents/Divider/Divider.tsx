@@ -23,6 +23,7 @@ import { css, styled } from '@apache-superset/core/ui';
 import { Draggable } from '../../dnd/DragDroppable';
 import HoverMenu from '../../menu/HoverMenu';
 import DeleteComponentButton from '../../DeleteComponentButton';
+import type { ConnectDragSource } from 'react-dnd';
 
 export interface DashboardComponent {
   id: string;
@@ -108,7 +109,7 @@ class Divider extends PureComponent<DividerProps> {
         onDrop={handleComponentDrop}
         editMode={editMode}
       >
-        {({ dragSourceRef }: any) => (
+        {({ dragSourceRef }: { dragSourceRef: ConnectDragSource }) => (
           <div ref={dragSourceRef}>
             {editMode && (
               <HoverMenu position="left">
