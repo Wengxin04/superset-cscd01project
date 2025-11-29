@@ -39,8 +39,8 @@ describe('Divider', () => {
     parentComponent: newComponentFactory(DASHBOARD_GRID_TYPE),
     index: 0,
     editMode: false,
-    handleComponentDrop: () => {},
-    deleteComponent: () => {},
+    handleComponentDrop: (...args: any[]) => {},
+    deleteComponent: (id: string, parentId: string) => {},
   };
 
   const setup = (overrideProps: Partial<DividerProps> = {}) =>
