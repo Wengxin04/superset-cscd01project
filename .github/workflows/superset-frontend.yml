@@ -21,7 +21,7 @@ jobs:
   frontend-build:
     runs-on: ubuntu-24.04
     outputs:
-      should-run: ${{ steps.check.outputs.frontend }}
+      should-run: 'true'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
